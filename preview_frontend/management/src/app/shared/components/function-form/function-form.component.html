@@ -1,0 +1,52 @@
+
+<ion-content>
+  <form [formGroup]="functionForm">
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          Event :  {{ name }}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            <ion-item>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input formControlName="name"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            <ion-item class="">
+              <ion-label position="floating">Location</ion-label>
+              <ion-select formControlName="location">
+                <ion-select-option [value]="a" *ngFor="let a of this.addressList">{{addressString(a)}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            <ion-item>
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea rows="6" formControlName="description"></ion-textarea>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="save()">Save</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="close()">Cancel</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Create an Address</ion-title>
+  </ion-toolbar>
+</ion-header>
+<app-address></app-address>
+<ion-row>
+  <ion-col>
+    <ion-button color="success" expand="full" (click)="getAddressFromTheForm()" [disabled]="addressComponent.addressForm.invalid">Add address</ion-button>
+  </ion-col>
+  <ion-col>
+    <ion-button color="danger" expand="full" (click)="dismiss()">Cancel</ion-button>
+  </ion-col>
+</ion-row>

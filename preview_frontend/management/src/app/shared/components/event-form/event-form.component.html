@@ -1,0 +1,108 @@
+<ion-content>
+  <form [formGroup]="eventForm" (ngSubmit)="actionEvent()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1 *ngIf="!update">+ Add new event</h1>
+          <h1 *ngIf="update">Update event</h1>
+        </ion-col>
+        <ion-col size="1">
+          <ion-button type="submit" color="primary" expand="block">Save</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label position="floating">Event name</ion-label>
+            <ion-input formControlName="name" type="text" required></ion-input>
+          </ion-item>
+          <div>
+            <ion-grid class="ion-no-margin ion-no-padding ion-margin-top">
+              <ion-row *ngIf="customers.length > 0" class="ion-align-items-center">
+                <ion-col class="ion-no-padding ion-align-items-stretch">
+                  <ion-item class="" >
+                    <ion-label position="floating">Company</ion-label>
+                    <ion-select [formControlName]="'customer_id'">
+                      <ion-select-option [value]="c.id" *ngFor="let c of customers">{{c.name}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="1">
+                  <ion-button [routerLink]="['/create-customer']" color="primary" size="large" expand="full"
+                    class="ion-no-margin">+</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </div>
+          <ion-item class="ion-margin-top">
+            <ion-label>Select start</ion-label>
+            <ion-datetime formControlName="start_date" displayFormat="DD-MMM-YY HH:mm" min="2021-01-01" mode="md"
+              placeholder="DD-MM-YY HH:mm"></ion-datetime>
+          </ion-item>
+          <ion-item class="ion-margin-top">
+            <ion-label>Select end</ion-label>
+            <ion-datetime formControlName="end_date" displayFormat="DD-MMM-YY HH:mm" min="2021-01-01" mode="md"
+              placeholder="DD-MM-YY HH:mm"></ion-datetime>
+          </ion-item>
+          <ion-item class="ion-margin-top">
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea formControlName="description" class="ion-no-margin" rows="6"
+              placeholder="Enter event description">
+            </ion-textarea>
+          </ion-item>
+
+        </ion-col>
+        <ion-col>
+
+          <app-contact-person-form *ngIf="this.eventdata?.contactperson"
+            [contactPerson]="this.eventdata?.contactperson"></app-contact-person-form>
+          <app-contact-person-form *ngIf="!this.eventdata?.contactperson"></app-contact-person-form>
+
+          <ion-row>
+            <ion-col>
+              <ion-label size="11" position="floating">Functions</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-button class="plus" (click)="addFunction()">+</ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let eventFunctionObj of eventFunctions">
+            <ion-button (click)="removeEventFunctionFromList(eventFunctionObj)">
+              <ion-icon name="trash"></ion-icon>
+            </ion-button>
+            <app-function-shifts [eventStartDate]= "this.eventForm.get('start_date').value" [eventEndDate] = "this.eventForm.get('end_date').value" [showInviteButtons]=update [eventFunction]="eventFunctionObj"></app-function-shifts>
+          </ion-row>
+        </ion-col>
+
+
+      </ion-row>
+
+
+      <ion-row>
+        <ion-col>
+          <h2>Locations</h2>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="presentAddressModal()">+</ion-button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let eventAddress of eventAddresses">
+        <ion-item>
+          <ion-button (click)="removeAddressFromList(eventAddress)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          {{eventAddress.street}}, {{eventAddress.house_number}}, {{eventAddress.postal_code}}, {{eventAddress.city}},
+          {{eventAddress.country}}
+        </ion-item>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+
+</ion-content>

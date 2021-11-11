@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>+ Add shift</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card-subtitle> Function: {{eventFunctionName}}</ion-card-subtitle>
+  <form [formGroup]="shiftForm">
+    <ion-grid>
+      <ion-row>
+        <ion-label>Start date/time</ion-label>
+        <ion-datetime formControlName="startDateTime" displayFormat="DD-MMM-YY HH:mm" [min]="minDate" [max]="maxDate" mode="md"
+                      placeholder="DD-MM-YY HH:mm"></ion-datetime>
+      </ion-row>
+      <ion-row>
+        <ion-label>End date/time</ion-label>
+        <ion-datetime formControlName="endDateTime" displayFormat="DD-MMM-YY HH:mm" [min]="this.shiftForm.get('startDateTime').value" mode="md"  [max]="maxDate"
+                      placeholder="DD-MM-YY HH:mm"></ion-datetime>
+      </ion-row>
+      <ion-row>
+        <ion-label>People needed</ion-label>
+        <ion-input formControlName="peopleNeeded" type="number" placeholder="0"></ion-input>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="save()">Save</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="cancel()">Cancel</ion-button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
+
+
+
+</ion-content>

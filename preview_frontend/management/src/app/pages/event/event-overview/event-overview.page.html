@@ -1,0 +1,54 @@
+
+
+<ion-content>
+  <!-- Top of table -->
+  <ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+
+        </ion-col>
+        <ion-col size="1">
+          <ion-button color="primary" expand="block" [routerLink]="'/create-event'">+</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-row class="ion-margin">
+      <ion-col>Event name</ion-col>
+      <ion-col>Company</ion-col>
+      <ion-col>Start date</ion-col>
+      <ion-col>Invites</ion-col>
+      <ion-col>Available</ion-col>
+      <ion-col>Fullfilled</ion-col>
+      <ion-col>Spare</ion-col>
+
+    </ion-row>
+    <div class="hr"></div>
+    <!-- Data -->
+
+    <ng-container *ngIf="eventsLoaded; else notLoaded">
+      <ion-row [routerLink]="['/create-event', e.id]" style="cursor: pointer" *ngFor="let e of events" class="ion-margin">
+        <ion-col class="ion-padding-top ion-padding-bottom">{{e.event_name}}</ion-col>
+        <ion-col class="ion-padding-top ion-padding-bottom">{{e.company_name}}</ion-col>
+        <ion-col class="ion-padding-top ion-padding-bottom">{{e.start_date}}</ion-col>
+        <ion-col class="ion-padding-top ion-padding-bottom">{{e.responded}} / {{e.invited}}</ion-col>
+        <ion-col class="ion-padding-top ion-padding-bottom">{{e.available}}</ion-col>
+        <ion-col class="ion-padding-top ion-padding-bottom">{{e.booked}} / {{e.fulfilled}}</ion-col>
+        <ion-col class="ion-padding-top ion-padding-bottom">{{e.spare}}</ion-col>
+      </ion-row>
+    </ng-container>
+    <ng-template #notLoaded>
+      <ion-row *ngFor="let e of ten" class="ion-margin">
+        <ion-col>...</ion-col>
+        <ion-col>...</ion-col>
+        <ion-col>...</ion-col>
+        <ion-col>... / ...</ion-col>
+        <ion-col>...</ion-col>
+        <ion-col>... / ...</ion-col>
+        <ion-col>...</ion-col>
+      </ion-row>
+    </ng-template>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> + Function details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <form [formGroup]="functionDetails">
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            <ion-item>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input formControlName="name" readonly="true" [value]="eventFunction.name"></ion-input>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+              <ion-label position="floating">Location</ion-label>
+            <ion-input formControlName="location" readonly="true" [value]="locationString"> </ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <div>
+            <ion-item>
+              <ion-label position="floating">Description</ion-label>
+              <ion-textarea rows="6" formControlName="description"  readonly="true" [value]="eventFunction.description"></ion-textarea>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="save()">Save</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="close()">Cancel</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
